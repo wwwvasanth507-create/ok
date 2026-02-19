@@ -1,0 +1,29 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<div style="max-width:600px; margin:0 auto; background:#1f1f1f; padding:20px; border-radius:8px;">
+    <h2>Upload to GitHub Releases</h2>
+    <form method="POST" enctype="multipart/form-data">
+        <div style="margin-bottom:15px;">
+            <label>Title</label>
+            <input type="text" name="title" required
+                style="width:100%; padding:10px; background:#121212; border:1px solid #333; color:white;">
+        </div>
+        <div style="margin-bottom:15px;">
+            <label>Video File</label>
+            <input type="file" name="video" accept="video/*" required
+                style="width:100%; padding:10px; background:#121212; border:1px solid #333; color:white;">
+        </div>
+        <div style="margin-bottom:15px;">
+            <label>GitHub Personal Access Token (Required for Upload)</label>
+            <input type="password" name="token" placeholder="ghp_................" required
+                style="width:100%; padding:10px; background:#121212; border:1px solid #333; color:white;">
+            <p style="color:#aaa; font-size:0.8rem;">We do not store your token. It is used once to upload to the repo.
+            </p>
+        </div>
+        <button type="submit"
+            style="background:red; color:white; padding:10px 20px; border:none; cursor:pointer;">Upload &
+            Process</button>
+    </form>
+</div>
+{% endblock %}

@@ -1,0 +1,38 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<script src="https://cdn.jsdelivr.net/npm/hls.js@latest"></script>
+
+<div style="max-width:1000px; margin:0 auto;">
+    <div style="position:relative; padding-top:56.25%; background:black;">
+        <video id="video" controls style="position:absolute; top:0; left:0; width:100%; height:100%;"></video>
+    </div>
+    <div style="padding:20px;">
+        <h1>{{ video.title }}</h1>
+        <p>Source: <a href="{{ video.hls_url }}" target="_blank" style="color:#3ea6ff;">GitHub Release Playlist</a></p>
+    </div>
+</div>
+
+<script>
+    var video = document.getElementById('video');
+    var videoSrc = "{{ video.hls_url }}";
+
+    if (Hls.isSupported()) {
+        var hls = new Hls();
+        hls.loadSource(videoSrc);
+        hls.attachMedia(video);
+        hls.on(Hls.Events.MANIFEST_PARSED, function () {
+            video.play();
+        });
+    }
+    else if (video.canPlayType('application/vnd.apple.mpegurl')) {
+        video.src = videoSrc;
+        video.addEventListener('loadedmetadata', function () {
+            video.play();
+        });
+    }
+
+    // Debug info
+    console.log("Playing from:", videoSrc);
+</script>
+{% endblock %}
