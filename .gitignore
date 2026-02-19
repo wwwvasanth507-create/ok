@@ -1,0 +1,6 @@
+__pycache__/
+static/uploads/
+static/hls/
+static/thumbnails/
+db.json
+*.pyc

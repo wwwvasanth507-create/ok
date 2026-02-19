@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>YouTube Clone (Frontend Only)</title>
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="static/css/style.css">
+
+    <!-- Scripts -->
+    <script src="https://cdn.jsdelivr.net/npm/hls.js@latest"></script>
+    <script src="https://unpkg.com/@ffmpeg/ffmpeg@0.11.0/dist/ffmpeg.min.js"></script>
+    <script src="static/js/db.js" defer></script>
+    <script src="static/js/app.js" defer></script>
+</head>
+
+<body>
+
+    <!-- Header -->
+    <header>
+        <div style="display: flex; align-items: center; gap: 15px;">
+            <i class="fas fa-bars" style="font-size: 1.2rem; cursor: pointer; padding: 10px;"
+                onclick="toggleSidebar()"></i>
+            <a href="#" class="logo" onclick="navigateTo('home')">
+                <i class="fab fa-youtube"></i> YouTube Clone
+            </a>
+        </div>
+
+        <div class="search-bar">
+            <input type="text" id="searchInput" placeholder="Search" onkeyup="searchVideos()">
+            <button onclick="searchVideos()"><i class="fas fa-search"></i></button>
+        </div>
+
+        <div class="user-actions">
+            <button class="btn-upload" title="Create" onclick="navigateTo('upload')">
+                <i class="fas fa-video"></i>
+            </button>
+            <div class="profile-icon">U</div>
+        </div>
+    </header>
+
+    <!-- Sidebar -->
+    <div class="sidebar" id="sidebar">
+        <a href="#" onclick="navigateTo('home')" class="active" id="nav-home">
+            <i class="fas fa-home"></i> Home
+        </a>
+        <a href="#">
+            <i class="fas fa-fire"></i> Trending
+        </a>
+        <a href="#">
+            <i class="fas fa-play-circle"></i> Subscriptions
+        </a>
+        <hr style="border-color: var(--border-color); margin: 10px 0;">
+        <a href="#">
+            <i class="fas fa-history"></i> History
+        </a>
+        <button onclick="clearDatabase()"
+            style="width: 100%; text-align: left; padding: 10px 24px; background: transparent; border: none; color: #ff4444; cursor: pointer;">
+            <i class="fas fa-trash"></i> Reset All Data
+        </button>
+    </div>
+
+    <!-- Main Content Area -->
+    <main id="main-content">
+        <!-- Views will be injected here via JS -->
+    </main>
+
+    <!-- Loading Overlay -->
+    <div id="loadingOverlay"
+        style="display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.8); z-index: 2000; flex-direction: column; align-items: center; justify-content: center;">
+        <i class="fas fa-circle-notch fa-spin fa-3x" style="color: #3ea6ff;"></i>
+        <h3 id="loadingText" style="margin-top: 20px;">Processing Video...</h3>
+        <p id="loadingsub" style="color: #aaa; max-width: 400px; text-align: center;">Converting to HLS format inside
+            your browser using WebAssembly...</p>
+        <div style="width: 300px; height: 4px; background: #333; margin-top: 10px; border-radius: 2px;">
+            <div id="progressBar" style="width: 0%; height: 100%; background: #cc0000; transition: width 0.3s;"></div>
+        </div>
+    </div>
+
+</body>
+
+</html>

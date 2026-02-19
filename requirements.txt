@@ -1,0 +1,5 @@
+flask
+requests
+ffmpeg-python
+python-dotenv
+flask-cors
